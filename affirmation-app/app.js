@@ -24,7 +24,8 @@ const state = {
   theme: "All",
   current: null,
   favorites: store.get("favorites", []),
-  name: store.get("name", ""),
+  name: store.get("name", "Précindy"),
+  theme_mode: store.get("theme", "system"),
 };
 
 // ---------- Daily pick ----------
@@ -218,6 +219,26 @@ function setupNameDialog() {
   });
 }
 
+// ---------- Appearance ----------
+
+function applyTheme(mode) {
+  state.theme_mode = mode;
+  store.set("theme", mode);
+  if (mode === "system") delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = mode;
+
+  for (const btn of document.querySelectorAll("[data-theme-option]")) {
+    btn.setAttribute("aria-pressed", String(btn.dataset.themeOption === mode));
+  }
+}
+
+function setupThemePicker() {
+  for (const btn of document.querySelectorAll("[data-theme-option]")) {
+    btn.addEventListener("click", () => applyTheme(btn.dataset.themeOption));
+  }
+  applyTheme(state.theme_mode);
+}
+
 // ---------- Init ----------
 
 $("fav-btn").addEventListener("click", () => toggleFavorite(state.current));
@@ -229,6 +250,7 @@ renderThemes();
 renderFavorites();
 updateStreak();
 setupNameDialog();
+setupThemePicker();
 
 state.current = pickDaily();
 $("affirmation").textContent = state.current.text;

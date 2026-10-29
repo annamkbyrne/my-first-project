@@ -26,8 +26,20 @@
   --radius-pill: 999px;
 }
 
+/* Light palette: chosen explicitly, or by the system when set to "System" */
+:root[data-theme="light"] {
+  --bg: #f6e9e1;
+  --text: rgba(30, 12, 30, 0.94);
+  --text-soft: rgba(30, 12, 30, 0.6);
+  --glass-fill: rgba(255, 255, 255, 0.42);
+  --glass-fill-strong: rgba(255, 255, 255, 0.62);
+  --glass-stroke: rgba(255, 255, 255, 0.7);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 10px 40px rgba(90, 40, 60, 0.18);
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme="dark"]) {
     --bg: #f6e9e1;
     --text: rgba(30, 12, 30, 0.94);
     --text-soft: rgba(30, 12, 30, 0.6);
@@ -38,6 +50,8 @@
     --glass-shadow: 0 10px 40px rgba(90, 40, 60, 0.18);
   }
 }
+
+body { transition: background 0.4s ease, color 0.4s ease; }
 
 * { box-sizing: border-box; }
 
@@ -228,6 +242,7 @@ body {
 }
 
 .icon {
+  flex-shrink: 0;
   width: 18px;
   height: 18px;
   fill: none;
@@ -332,6 +347,45 @@ body {
 
 .empty { margin: 6px 0 8px; color: var(--text-soft); font-size: 14px; }
 
+/* ---------- Appearance ---------- */
+.appearance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 12px;
+  padding: 14px 14px 14px 20px;
+  border-radius: var(--radius-lg);
+}
+
+.appearance h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.appearance .segmented {
+  flex: 1 1 240px;
+  max-width: 300px;
+  margin-left: auto;
+  padding: 4px;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-stroke);
+  overflow: visible;
+}
+
+.appearance .segment {
+  flex: 1;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.appearance .icon { width: 15px; height: 15px; }
+
 .foot {
   text-align: center;
   font-size: 13px;
@@ -386,4 +440,14 @@ body {
 /* Fallback for browsers without backdrop-filter */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass, .glass-btn { background: rgba(60, 30, 70, 0.85); }
+}
+
+/* Smallest phones: drop action icons so labels fit */
+@media (max-width: 350px) {
+  .actions .icon { display: none; }
+}
+
+@media (max-width: 380px) {
+  .actions { gap: 8px; }
+  .actions .glass-btn { font-size: 14px; gap: 4px; }
 }

@@ -1,6 +1,6 @@
 # Crowned Daily
 
-A daily affirmation web app for Black women in business, with an Apple-style glassmorphic design: frosted panels, soft drifting color fields, and automatic light and dark modes.
+A daily affirmation web app for Black women in business, with an Apple-style glassmorphic design: frosted panels, soft drifting color fields, and System, Light and Dark appearance modes.
 
 ## Run it
 
@@ -19,13 +19,14 @@ Then go to http://localhost:8000. On an iPhone, open the page in Safari and choo
 - **Another:** shows a different affirmation from the selected theme
 - **Save:** keeps favorites on your device
 - **Share:** uses the phone's share sheet, or copies the text on desktop
-- **Daily streak** and a personalized greeting (tap the crown to add your name)
+- **Daily streak** and a personalized greeting. It greets Précindy by default; tap the initial to change the name.
+- **Appearance:** System, Light or Dark. The choice is remembered.
 
 ## Files
 
 | File | Purpose |
 |---|---|
 | `index.html` | Page structure |
-| `styles.css` | Glass design, light and dark themes |
+| `styles.css` | Glass design and light and dark themes |
 | `app.js` | App logic |
 | `affirmations.js` | The affirmation library. Add or edit entries here. |
